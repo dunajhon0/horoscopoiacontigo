@@ -1,0 +1,99 @@
+{
+  "date": "2026-02-28",
+  "aries": {
+    "resumen": "Hoy es un día para tomar la iniciativa. La energía planetaria favorece los nuevos comienzos y la toma de decisiones asertivas. No temas dar ese paso que has estado posponiendo.",
+    "amor": "En el ámbito sentimental, la comunicación directa será tu mejor aliada. Si estás en pareja, es buen momento para hablar de planes a futuro. Si estás soltero, una actitud genuina atraerá a alguien interesante.",
+    "trabajo": "Tu capacidad de liderazgo destacará hoy. Es probable que se te presente un desafío que requiera respuestas rápidas y soluciones creativas. Confía en tu intuición profesional.",
+    "energia": "Tu vitalidad está en alza. Canaliza esta energía en actividad física al aire libre o en un proyecto que requiera esfuerzo físico. Evita el sedentarismo.",
+    "consejo": "No permitas que la impulsividad nuble tu juicio. Cuenta hasta diez antes de reaccionar ante una provocación.",
+    "frase": "La acción es la clave fundamental de todo éxito."
+  },
+  "tauro": {
+    "resumen": "La paciencia y la perseverancia serán tus mejores armas hoy. Las cosas pueden no avanzar tan rápido como quisieras, pero los resultados a largo plazo valdrán la pena la espera.",
+    "amor": "Busca la estabilidad emocional. Un gesto pequeño pero constante hacia tu pareja o seres queridos fortalecerá los lazos. La lealtad será recíproca y muy valorada hoy.",
+    "trabajo": "No es día para grandes riesgos financieros o cambios drásticos en el trabajo. Concéntrate en consolidar lo que ya tienes y en terminar las tareas pendientes con atención al detalle.",
+    "energia": "Presta atención a tu cuello y garganta, podrías sentir cierta tensión. Un descanso adecuado y escuchar música relajante te ayudarán a recargar energías.",
+    "consejo": "La terquedad puede ser un obstáculo. Abre tu mente a otras perspectivas antes de tomar una decisión definitiva.",
+    "frase": "La paciencia es amarga, pero su fruto es dulce."
+  },
+  "geminis": {
+    "resumen": "Día excelente para la comunicación y el aprendizaje. Tu mente estará aguda y receptiva. Aprovecha para poner al día tus correos, hacer llamadas importantes o aprender algo nuevo.",
+    "amor": "La diversión y la espontaneidad serán clave. Una conversación estimulante podría encender la chispa si estás soltero. Con tu pareja, propón un plan diferente y rompe la rutina.",
+    "trabajo": "Tu versatilidad te permitirá adaptarte a cambios inesperados en el entorno laboral. Es un buen momento para el networking y para compartir tus ideas con el equipo.",
+    "energia": "Tu mente puede estar muy activa, lo que podría dificultar el descanso. Practica ejercicios de respiración o meditación para calmar tus pensamientos al finalizar el día.",
+    "consejo": "Evita dispersarte. Concéntrate en una tarea a la vez para no agotar tu energía mental en múltiples frentes.",
+    "frase": "La verdadera inteligencia consiste en saber cómo aprovechar al máximo los recursos disponibles."
+  },
+  "cancer": {
+    "resumen": "Las emociones estarán a flor de piel. Hoy es un día para conectar con tu interior y con las personas que te hacen sentir seguro. El hogar será tu refugio ideal.",
+    "amor": "Demuestra tu lado más tierno y compasivo. Tu intuición te guiará para saber qué necesita tu pareja sin que tenga que decirlo. Si buscas amor, búscalo en entornos familiares o muy de confianza.",
+    "trabajo": "Podrías sentir cierta sobrecarga emocional derivada del trabajo. Intenta no llevarte los problemas laborales a casa. Mantén un ambiente ordenado para favorecer tu concentración.",
+    "energia": "Tu sistema digestivo estará sensible. Opta por comidas ligeras y evita situaciones de estrés mientras comes. El contacto con el agua (un baño relajante) será muy beneficioso.",
+    "consejo": "No dejes que la nostalgia te impida disfrutar del presente. Construye nuevos y hermosos recuerdos hoy.",
+    "frase": "El hogar no es de donde eres, es donde encuentras la luz cuando todo oscurece."
+  },
+  "leo": {
+    "resumen": "Día para brillar con luz propia. Tu carisma y creatividad estarán en su punto máximo. No tengas miedo de ser el centro de atención, siempre y cuando lo hagas con generosidad.",
+    "amor": "Tu magnetismo atraerá miradas. Es un buen día para el romance apasionado y las grandes demostraciones de afecto. Si tienes pareja, hazla sentir especial y única.",
+    "trabajo": "Excelente momento para presentar proyectos o liderar reuniones. Tu entusiasmo contagiará a los demás. Sin embargo, asegúrate de escuchar también las aportaciones de tu equipo.",
+    "energia": "Tu vitalidad es envidiable, pero cuida tu corazón y espalda. No te excedas en esfuerzos físicos si no estás acostumbrado. Mantén una postura correcta.",
+    "consejo": "El orgullo puede ser un arma de doble filo. Aprende a aceptar críticas constructivas con humildad.",
+    "frase": "Sé tú mismo, los demás puestos ya están ocupados."
+  },
+  "virgo": {
+    "resumen": "La organización y el análisis serán tus mejores aliados. Hoy podrás resolver un problema complejo que requiere atención al detalle. Día propicio para poner orden en tu vida personal y profesional.",
+    "amor": "El servicio y los pequeños detalles serán tu forma de demostrar amor. Ayudar a tu pareja con una tarea pesada valdrá más que mil palabras. Si buscas pareja, busca a alguien que comparta tus valores prácticos.",
+    "trabajo": "Tu eficiencia será reconocida. Es un momento ideal para revisar cuentas, optimizar procesos y planificar a futuro. No te obsesiones con el perfeccionismo si retrasa la acción.",
+    "energia": "Tu sistema nervioso puede verse afectado por pensar demasiado. Establece momentos de descanso mental a lo largo del día y evita que las preocupaciones menores te agobien.",
+    "consejo": "No seas tan crítico contigo mismo ni con los demás. Acepta que la imperfección es parte de la condición humana.",
+    "frase": "El orden es el placer de la razón, pero el desorden es la delicia de la imaginación."
+  },
+  "libra": {
+    "resumen": "Día para buscar la armonía y el equilibrio en todas las áreas de tu vida. Las relaciones interpersonales se verán favorecidas por tu diplomacia y tu sentido de la justicia.",
+    "amor": "El romanticismo clásico será lo más acertado hoy. Una cena, buena música o una conversación sincera fortalecerán tu vínculo. Evita los conflictos y busca acuerdos agradables para ambos.",
+    "trabajo": "Excelente día para negociar, mediar en conflictos laborales o trabajar en equipo. Tu capacidad para ver ambos lados de un problema será invaluable para tus superiores y compañeros.",
+    "energia": "Cuidar tu estética personal mejorará tu ánimo. Los riñones están más sensibles, asegúrate de beber suficiente agua y mantener una dieta equilibrada.",
+    "consejo": "No pospongas una decisión importante por miedo a desagradar a alguien. A veces, la justicia requiere firmeza.",
+    "frase": "El equilibrio es la clave que abre todas las puertas de la paz."
+  },
+  "escorpio": {
+    "resumen": "Día de transformación y profundidad. No te conformarás con respuestas superficiales. Aprovecha esta energía para investigar, resolver misterios y superar obstáculos personales.",
+    "amor": "La intensidad marcará tus relaciones. Las emociones serán profundas y apasionadas. Es un buen momento para la intimidad, pero evita actitudes posesivas o celos infundados.",
+    "trabajo": "Tu determinación te permitirá avanzar en tareas que otros consideran muy difíciles. Tienes un instinto afilado para los negocios hoy. Mantén tus planes en reserva hasta que estén listos.",
+    "energia": "La tensión puede acumularse en la zona pélvica. Ejercicios de elongación o yoga te ayudarán a liberar la carga física y emocional. Permítete tiempos de soledad para recargar.",
+    "consejo": "El rencor es un veneno que te tomas esperando que muera el otro. Hoy es buen día para perdonar y soltar.",
+    "frase": "De las cenizas de tu antiguo yo, nacerá una versión más fuerte y sabia."
+  },
+  "sagitario": {
+    "resumen": "El optimismo y el deseo de aventura guiarán tu día. Sientes la necesidad de expandir tus horizontes, ya sea mediante el aprendizaje, un viaje o conociendo personas de culturas diferentes.",
+    "amor": "Necesitas espacio y libertad en tu relación sentimental. Un amor basado en la amistad y los ideales compartidos tendrá éxito hoy. Si estás soltero, una actitud jovial atraerá energías afines.",
+    "trabajo": "Día ideal para planificar a largo plazo o para proyectos relacionados con el extranjero o la educación superior. No dejes que el exceso de entusiasmo te impida ver los detalles prácticos.",
+    "energia": "Mucha energía vital que necesitas canalizar. El ejercicio cardiovascular será excelente, pero cuida tus caderas y muslos de pequeñas lesiones por exceso de confianza.",
+    "consejo": "Tu honestidad directa puede ser malinterpretada o herir susceptibilidades. Intenta aplicar un poco de tacto en tus observaciones.",
+    "frase": "El verdadero viaje de descubrimiento no consiste en buscar nuevos paisajes, sino en tener nuevos ojos."
+  },
+  "capricornio": {
+    "resumen": "La responsabilidad y la ambición profesional son tus prioridades hoy. Es un día excelente para sentar bases sólidas y trabajar duro por tus objetivos a largo plazo. Tu disciplina dará frutos.",
+    "amor": "Buscas seriedad y compromiso. Las demostraciones de amor prácticas y concretas serán las más valoradas por ti y por tu pareja. Si buscas amor, alguien enfocado y respetuoso captará tu atención.",
+    "trabajo": "Paso lento pero seguro. Tu perseverancia y capacidad de organización te harán destacar ante figuras de autoridad. Es buen momento para solicitar responsabilidades o planificar tu ascenso.",
+    "energia": "Atención a rodillas, huesos y piel. Asegúrate de descansar lo suficiente, tu tendencia a sobrecargarte de deberes puede pasarte factura si no equilibras el trabajo con el ocio.",
+    "consejo": "No permitas que el deber opaque la alegría. Permítete un momento de relax y disfruta de los pequeños logros del día.",
+    "frase": "La cima de la montaña está reservada para aquellos que no temen escalar las rocas más escarpadas."
+  },
+  "acuario": {
+    "resumen": "Tu originalidad y rebeldía hoy son tu mayor fortaleza. Día propicio para la innovación, conectar con amigos, trabajar en grupos o causas sociales, y romper con las viejas reglas.",
+    "amor": "El amor requiere innovación. Sorprende a tu pareja con un plan nada convencional. La amistad será la base sólida de cualquier relación exitosa hoy. Si estás soltero, déjate sorprender por alguien diferente.",
+    "trabajo": "Las ideas brillantes fluirán de tu mente. No dudes en proponer soluciones tecnológicas u originales en tu entorno laboral. El trabajo en equipo será el motor principal de tus avances.",
+    "energia": "Tu sistema circulatorio requiere atención. Evita pasar demasiado tiempo en la misma posición y busca actividades que te ayuden a desestresarte o salir de la rutina monótona.",
+    "consejo": "Ser diferente no implica estar en contra de todo. Aprende a integrar tu visión de futuro con el mundo presente.",
+    "frase": "No puedes cambiar el mundo siendo igual al resto del mundo."
+  },
+  "piscis": {
+    "resumen": "Día marcado por la intuición, la empatía y la inspiración artística. Sentirás una gran conexión espiritual. Confía en tus presagios y corazonadas, raramente te fallarán hoy.",
+    "amor": "El romance y la comprensión sin palabras estarán muy presentes. Es el momento perfecto para conectar a un nivel casi telepático con tu pareja. Si estás solo, un amor platónico podría cobrar sentido.",
+    "trabajo": "Ideal para trabajos creativos, artísticos o de ayuda a los demás. En entornos muy competitivos podrías sentirte fuera de lugar y necesitar aislarte un momento para recuperar fuerzas.",
+    "energia": "Presta especial atención a tus pies, pueden estar sensibles. Tu nivel de energía física puede fluctuar y absorberás fácilmente las emociones del entorno. Busca estar cerca del mar o escuchar agua fluir.",
+    "consejo": "Evita el escapismo o hacerte la víctima ante las dificultades. Enfrenta los problemas con tu gran fuerza compasiva.",
+    "frase": "La lógica te llevará de A a B. La imaginación te llevará a todas partes."
+  }
+}

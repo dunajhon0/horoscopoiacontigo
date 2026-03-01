@@ -1,0 +1,42 @@
+name: Daily Horoscope Update
+
+on:
+  schedule:
+    # Runs at 23:00 UTC every day
+    - cron: '0 23 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions 
+
+jobs:
+  update-horoscope:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Generate new horoscope
+        run: |
+          # Normally here you would run a script to call an AI API (like OpenAI/Claude)
+          # For a fully static site without API keys in repo, you might use a pre-generated 
+          # local script that cycles through an array, or a python script fetching public APIs.
+          
+          # Example placeholder action: update the date in the JSON to today to keep it fresh
+          TODAY=$(date -u +"%Y-%m-%d")
+          
+          # Simple script to update the date attribute in data/horoscope.json
+          # (Assuming 'jq' is installed in ubuntu-latest)
+          jq --arg today "$TODAY" '.date = $today' data/horoscope.json > tmp.json && mv tmp.json data/horoscope.json
+          
+          echo "Updated horoscope date to: $TODAY"
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -a -m "🤖 Auto-update: Daily Horoscope [skip ci]" || echo "No changes to commit"
+          git push
