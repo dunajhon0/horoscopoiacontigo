@@ -146,7 +146,7 @@ function initModal() {
 
     if (compatBtn) {
         compatBtn.addEventListener('click', () => {
-            alert('La función de compatibilidad astral estará disponible próximamente. ¡Vuelve pronto!');
+            showCompatibility();
         });
     }
 }
@@ -157,6 +157,81 @@ function closeHoroscopeModal() {
         modal.classList.add('hidden');
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+    }
+}
+
+// ── Compatibility Feature ───────────────────────────────────
+let compatData = null;
+
+async function showCompatibility() {
+    // currentSignId is set by horoscope.js when a modal is opened
+    if (typeof currentSignId === 'undefined' || !currentSignId) return;
+
+    // Remove previous compatibility result if any
+    const existing = document.getElementById('compat-result');
+    if (existing) {
+        existing.remove();
+        return; // Toggle off
+    }
+
+    // Load compatibility data on first use
+    if (!compatData) {
+        try {
+            const res = await fetch('data/compatibility.json');
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            compatData = await res.json();
+        } catch (err) {
+            console.error('Error cargando compatibilidad:', err);
+            return;
+        }
+    }
+
+    const signData = compatData.matrix[currentSignId];
+    if (!signData) return;
+
+    // Use same hash function from horoscope.js for determinism
+    const todayStr = typeof getTodayStr === 'function' ? getTodayStr() : new Date().toISOString().split('T')[0];
+    const seed = todayStr + ':compat:' + currentSignId;
+    var h = 0;
+    for (var i = 0; i < seed.length; i++) {
+        h = ((h << 5) - h + seed.charCodeAt(i)) | 0;
+    }
+    h = Math.abs(h);
+
+    // Pick from high-compatibility signs
+    const compatibleSignId = signData.alta[h % signData.alta.length];
+    const compatibleName = compatData.signNames[compatibleSignId] || compatibleSignId;
+    const compatibleIcon = compatData.signIcons[compatibleSignId] || '';
+    const consejo = compatData.consejos[h % compatData.consejos.length];
+
+    // Determine compatibility level label
+    const levelSeed = todayStr + ':level:' + currentSignId;
+    var lh = 0;
+    for (var j = 0; j < levelSeed.length; j++) {
+        lh = ((lh << 5) - lh + levelSeed.charCodeAt(j)) | 0;
+    }
+    const levels = ['Alta', 'Muy Alta', 'Excelente'];
+    const level = levels[Math.abs(lh) % levels.length];
+
+    // Create result element
+    const resultDiv = document.createElement('div');
+    resultDiv.id = 'compat-result';
+    resultDiv.className = 'compat-result';
+    resultDiv.innerHTML =
+        '<div class="reading-block">' +
+        '<h4>💫 Compatibilidad del Día</h4>' +
+        '<p>Tu signo más compatible hoy es <strong>' + compatibleIcon + ' ' + compatibleName + '</strong> — Afinidad: <em>' + level + '</em></p>' +
+        '</div>' +
+        '<div class="quote-block">' +
+        consejo +
+        '</div>';
+
+    // Insert before the footer actions in the modal
+    const modalBody = document.getElementById('modal-body');
+    if (modalBody) {
+        modalBody.appendChild(resultDiv);
+        // Smooth scroll to result
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 }
 

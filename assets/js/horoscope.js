@@ -1,7 +1,7 @@
 /**
  * ═══════════════════════════════════════════════════════════
- * Horóscopo IA Contigo — Horoscope Data & Rendering
- * Fetches horoscope.json, renders zodiac cards, opens modal
+ * Horóscopo IA Contigo — Deterministic Daily Horoscope
+ * Seeded hash selects from content pool, same date+sign = same result
  * ═══════════════════════════════════════════════════════════
  */
 
@@ -20,31 +20,70 @@ const ZODIAC_SIGNS = [
     { id: 'piscis', name: 'Piscis', icon: '♓', dates: '19 Feb – 20 Mar' }
 ];
 
-let dailyData = null;
+let contentPool = null;
+let currentSignId = null;
 
 document.addEventListener('DOMContentLoaded', loadHoroscope);
 
+/* ── Seeded Hash (deterministic, same input = same output) ── */
+function hashCode(str) {
+    var h = 0;
+    for (var i = 0; i < str.length; i++) {
+        h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+    }
+    return Math.abs(h);
+}
+
+function pickIndex(dateStr, signId, category, poolLength) {
+    var seed = dateStr + ':' + signId + ':' + category;
+    return hashCode(seed) % poolLength;
+}
+
+/* ── Generate daily content from pool ── */
+function generateDailyContent(signId, dateStr) {
+    if (!contentPool || !contentPool[signId]) return null;
+    var pool = contentPool[signId];
+    return {
+        resumen: pool.resumen[pickIndex(dateStr, signId, 'resumen', pool.resumen.length)],
+        amor: pool.amor[pickIndex(dateStr, signId, 'amor', pool.amor.length)],
+        trabajo: pool.trabajo[pickIndex(dateStr, signId, 'trabajo', pool.trabajo.length)],
+        energia: pool.energia[pickIndex(dateStr, signId, 'energia', pool.energia.length)],
+        consejo: pool.consejo[pickIndex(dateStr, signId, 'consejo', pool.consejo.length)],
+        frase: pool.frase[pickIndex(dateStr, signId, 'frase', pool.frase.length)]
+    };
+}
+
+/* ── Get today's date string (YYYY-MM-DD) ── */
+function getTodayStr() {
+    var d = new Date();
+    var y = d.getFullYear();
+    var m = String(d.getMonth() + 1).padStart(2, '0');
+    var day = String(d.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + day;
+}
+
+/* ── Load & Render ── */
 async function loadHoroscope() {
-    const grid = document.getElementById('zodiac-grid');
+    var grid = document.getElementById('zodiac-grid');
     if (!grid) return;
 
     try {
-        const cacheBust = new Date().toISOString().split('T')[0];
-        const res = await fetch('data/horoscope.json?v=' + cacheBust);
+        var cacheBust = getTodayStr();
+        var res = await fetch('data/content-pool.json?v=' + cacheBust);
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        dailyData = await res.json();
+        contentPool = await res.json();
         renderGrid(grid);
     } catch (err) {
-        console.error('Error cargando horóscopo:', err);
-        grid.innerHTML = '<div class="loading-text">No se pudo conectar con los astros. Comprueba que <code>data/horoscope.json</code> existe.</div>';
+        console.error('Error cargando contenido:', err);
+        grid.innerHTML = '<div class="loading-text">No se pudo conectar con los astros. Comprueba que <code>data/content-pool.json</code> existe.</div>';
     }
 }
 
 function renderGrid(container) {
     container.innerHTML = '';
 
-    ZODIAC_SIGNS.forEach(sign => {
-        const card = document.createElement('article');
+    ZODIAC_SIGNS.forEach(function (sign) {
+        var card = document.createElement('article');
         card.className = 'zodiac-card';
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
@@ -66,11 +105,16 @@ function renderGrid(container) {
 }
 
 function openModal(sign) {
-    var data = dailyData ? dailyData[sign.id] : null;
+    var todayStr = getTodayStr();
+    var data = generateDailyContent(sign.id, todayStr);
+
     if (!data) {
         alert('Los astros aún no han revelado la información para ' + sign.name + '.');
         return;
     }
+
+    // Store current sign for compatibility feature
+    currentSignId = sign.id;
 
     var modal = document.getElementById('horoscope-modal');
     var iconEl = document.getElementById('modal-icon');
@@ -85,9 +129,9 @@ function openModal(sign) {
     if (nameEl) nameEl.textContent = sign.name;
 
     // Date
-    if (dateEl && dailyData.date) {
+    if (dateEl) {
         var opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        var ds = new Date(dailyData.date + 'T00:00:00').toLocaleDateString('es-ES', opts);
+        var ds = new Date(todayStr + 'T00:00:00').toLocaleDateString('es-ES', opts);
         dateEl.textContent = ds.charAt(0).toUpperCase() + ds.slice(1);
     }
 

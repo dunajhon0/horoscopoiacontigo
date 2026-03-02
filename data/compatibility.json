@@ -1,0 +1,304 @@
+{
+    "matrix": {
+        "aries": {
+            "alta": [
+                "leo",
+                "sagitario",
+                "geminis",
+                "acuario"
+            ],
+            "media": [
+                "aries",
+                "libra",
+                "virgo"
+            ],
+            "baja": [
+                "cancer",
+                "capricornio",
+                "escorpio",
+                "tauro",
+                "piscis"
+            ]
+        },
+        "tauro": {
+            "alta": [
+                "virgo",
+                "capricornio",
+                "cancer",
+                "piscis"
+            ],
+            "media": [
+                "tauro",
+                "escorpio",
+                "libra"
+            ],
+            "baja": [
+                "leo",
+                "acuario",
+                "aries",
+                "sagitario",
+                "geminis"
+            ]
+        },
+        "geminis": {
+            "alta": [
+                "libra",
+                "acuario",
+                "aries",
+                "leo"
+            ],
+            "media": [
+                "geminis",
+                "sagitario",
+                "virgo"
+            ],
+            "baja": [
+                "piscis",
+                "escorpio",
+                "cancer",
+                "tauro",
+                "capricornio"
+            ]
+        },
+        "cancer": {
+            "alta": [
+                "escorpio",
+                "piscis",
+                "tauro",
+                "virgo"
+            ],
+            "media": [
+                "cancer",
+                "capricornio",
+                "libra"
+            ],
+            "baja": [
+                "aries",
+                "sagitario",
+                "geminis",
+                "leo",
+                "acuario"
+            ]
+        },
+        "leo": {
+            "alta": [
+                "aries",
+                "sagitario",
+                "geminis",
+                "libra"
+            ],
+            "media": [
+                "leo",
+                "acuario",
+                "escorpio"
+            ],
+            "baja": [
+                "tauro",
+                "capricornio",
+                "cancer",
+                "virgo",
+                "piscis"
+            ]
+        },
+        "virgo": {
+            "alta": [
+                "tauro",
+                "capricornio",
+                "cancer",
+                "escorpio"
+            ],
+            "media": [
+                "virgo",
+                "piscis",
+                "geminis"
+            ],
+            "baja": [
+                "aries",
+                "sagitario",
+                "leo",
+                "acuario",
+                "libra"
+            ]
+        },
+        "libra": {
+            "alta": [
+                "geminis",
+                "acuario",
+                "leo",
+                "sagitario"
+            ],
+            "media": [
+                "libra",
+                "aries",
+                "cancer"
+            ],
+            "baja": [
+                "tauro",
+                "capricornio",
+                "escorpio",
+                "virgo",
+                "piscis"
+            ]
+        },
+        "escorpio": {
+            "alta": [
+                "cancer",
+                "piscis",
+                "virgo",
+                "capricornio"
+            ],
+            "media": [
+                "escorpio",
+                "tauro",
+                "leo"
+            ],
+            "baja": [
+                "aries",
+                "sagitario",
+                "geminis",
+                "libra",
+                "acuario"
+            ]
+        },
+        "sagitario": {
+            "alta": [
+                "aries",
+                "leo",
+                "libra",
+                "acuario"
+            ],
+            "media": [
+                "sagitario",
+                "geminis",
+                "piscis"
+            ],
+            "baja": [
+                "tauro",
+                "cancer",
+                "virgo",
+                "escorpio",
+                "capricornio"
+            ]
+        },
+        "capricornio": {
+            "alta": [
+                "tauro",
+                "virgo",
+                "escorpio",
+                "piscis"
+            ],
+            "media": [
+                "capricornio",
+                "cancer",
+                "libra"
+            ],
+            "baja": [
+                "aries",
+                "geminis",
+                "leo",
+                "sagitario",
+                "acuario"
+            ]
+        },
+        "acuario": {
+            "alta": [
+                "geminis",
+                "libra",
+                "aries",
+                "sagitario"
+            ],
+            "media": [
+                "acuario",
+                "leo",
+                "virgo"
+            ],
+            "baja": [
+                "tauro",
+                "cancer",
+                "escorpio",
+                "capricornio",
+                "piscis"
+            ]
+        },
+        "piscis": {
+            "alta": [
+                "cancer",
+                "escorpio",
+                "tauro",
+                "capricornio"
+            ],
+            "media": [
+                "piscis",
+                "virgo",
+                "sagitario"
+            ],
+            "baja": [
+                "aries",
+                "geminis",
+                "leo",
+                "libra",
+                "acuario"
+            ]
+        }
+    },
+    "consejos": [
+        "Hoy la conexión emocional fluye con naturalidad. Déjate llevar por la intuición y verás cómo los vínculos se fortalecen.",
+        "Es un buen día para expresar lo que sientes sin reservas. La sinceridad será tu mejor aliada en las relaciones.",
+        "La paciencia será clave en tus relaciones hoy. No fuerces situaciones; deja que las cosas se desarrollen a su ritmo.",
+        "Presta atención a los pequeños gestos. A veces un detalle sencillo vale más que mil palabras en el terreno afectivo.",
+        "El diálogo abierto favorecerá la armonía. Si hay algo que resolver, este es el momento de hablarlo con calma.",
+        "Hoy es un día para escuchar más que para hablar. Comprender al otro te acercará más de lo que imaginas.",
+        "La empatía será tu superpoder. Ponerte en el lugar del otro te revelará caminos para fortalecer la relación.",
+        "No temas mostrar vulnerabilidad. La autenticidad emocional generará confianza y cercanía con quienes te rodean.",
+        "Es momento de valorar lo que tienes. La gratitud hacia las personas que te acompañan multiplicará la energía positiva.",
+        "Hoy los astros favorecen los encuentros significativos. Mantén el corazón abierto a nuevas conexiones.",
+        "La comunicación no verbal será especialmente importante hoy. Una mirada o un gesto pueden decir más que las palabras.",
+        "Dedica tiempo de calidad a las personas que importan. La presencia genuina es el regalo más valioso que puedes ofrecer.",
+        "Tu energía emocional está en un punto alto. Aprovéchala para resolver conflictos pendientes con serenidad.",
+        "La compatibilidad no solo depende de los signos, sino de la disposición al encuentro. Hoy tienes ambas cosas a tu favor.",
+        "Confía en el proceso. Las relaciones que se construyen con paciencia y respeto son las que perduran en el tiempo.",
+        "Hoy la luna favorece la introspección emocional. Comprender tus propias necesidades te ayudará a comunicarlas mejor.",
+        "Un acto de generosidad desinteresada puede transformar por completo la dinámica de una relación hoy.",
+        "Los malentendidos se disipan cuando hay voluntad de entender. Acércate desde el cariño y verás resultados.",
+        "Es un día propicio para renovar compromisos y recordar por qué elegiste a las personas de tu vida.",
+        "La energía cósmica de hoy invita a la reconciliación. Si hay algo pendiente, este es el momento de dar el primer paso.",
+        "Tu capacidad de adaptación será fundamental en las relaciones hoy. Fluir con los cambios fortalecerá los vínculos.",
+        "No subestimes el poder de una conversación profunda. Hoy las palabras tienen el potencial de sanar y unir.",
+        "La armonía emocional comienza contigo. Cuida tu paz interior y verás cómo se refleja en todas tus relaciones.",
+        "Hoy es un día para celebrar las diferencias. Lo que te complementa es precisamente lo que no tienes.",
+        "La complicidad se construye día a día. Un gesto de humor compartido puede ser el puente que necesitabas.",
+        "Deja atrás las expectativas rígidas. Las mejores conexiones surgen cuando permites que el otro sea quien realmente es.",
+        "Tu intuición está especialmente aguda hoy para captar las necesidades emocionales de quienes te rodean.",
+        "La ternura será tu lenguaje más poderoso. No temas expresar afecto de forma abierta y natural.",
+        "Hoy los tránsitos planetarios favorecen la construcción de puentes emocionales. Aprovecha esta energía positiva.",
+        "Recuerda que toda relación es un espejo. Lo que admiras en el otro también vive dentro de ti."
+    ],
+    "signNames": {
+        "aries": "Aries",
+        "tauro": "Tauro",
+        "geminis": "Géminis",
+        "cancer": "Cáncer",
+        "leo": "Leo",
+        "virgo": "Virgo",
+        "libra": "Libra",
+        "escorpio": "Escorpio",
+        "sagitario": "Sagitario",
+        "capricornio": "Capricornio",
+        "acuario": "Acuario",
+        "piscis": "Piscis"
+    },
+    "signIcons": {
+        "aries": "♈",
+        "tauro": "♉",
+        "geminis": "♊",
+        "cancer": "♋",
+        "leo": "♌",
+        "virgo": "♍",
+        "libra": "♎",
+        "escorpio": "♏",
+        "sagitario": "♐",
+        "capricornio": "♑",
+        "acuario": "♒",
+        "piscis": "♓"
+    }
+}

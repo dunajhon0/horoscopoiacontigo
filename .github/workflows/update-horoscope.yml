@@ -6,6 +6,12 @@ on:
     - cron: '0 23 * * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions 
 
+# NOTE: Since March 2026, the site uses a deterministic content generation
+# system (content-pool.json + seeded hash in horoscope.js). Daily content is
+# generated client-side, so this workflow is now OPTIONAL.
+# It can still be used to update the legacy horoscope.json fallback file
+# or to trigger cache invalidation on Cloudflare.
+
 jobs:
   update-horoscope:
     runs-on: ubuntu-latest
@@ -14,25 +20,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          
-      - name: Generate new horoscope
+      - name: Update horoscope date (legacy fallback)
         run: |
-          # Normally here you would run a script to call an AI API (like OpenAI/Claude)
-          # For a fully static site without API keys in repo, you might use a pre-generated 
-          # local script that cycles through an array, or a python script fetching public APIs.
-          
-          # Example placeholder action: update the date in the JSON to today to keep it fresh
           TODAY=$(date -u +"%Y-%m-%d")
           
-          # Simple script to update the date attribute in data/horoscope.json
-          # (Assuming 'jq' is installed in ubuntu-latest)
-          jq --arg today "$TODAY" '.date = $today' data/horoscope.json > tmp.json && mv tmp.json data/horoscope.json
-          
-          echo "Updated horoscope date to: $TODAY"
+          # Update the date in the legacy horoscope.json (optional fallback)
+          if [ -f data/horoscope.json ]; then
+            jq --arg today "$TODAY" '.date = $today' data/horoscope.json > tmp.json && mv tmp.json data/horoscope.json
+            echo "Updated legacy horoscope date to: $TODAY"
+          fi
           
       - name: Commit and push changes
         run: |

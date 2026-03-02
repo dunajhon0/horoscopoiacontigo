@@ -61,12 +61,14 @@
     <header class="site-nav" role="banner">
         <div class="container nav-inner">
             <a href="index.html" class="nav-brand" aria-label="Inicio">
-                <img src="assets/images/logo.png" alt="Horóscopo IA Contigo">
-                <span>Horóscopo IA</span>
+                <img src="assets/images/logo.png" alt="Horóscopo IA Contigo" class="nav-logo-lg">
             </a>
             <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
             <nav class="nav-links" id="nav-links" aria-label="Navegación principal">
                 <a href="#horoscopo">Horóscopo</a>
+                <a href="#suerte-diaria">Suerte Diaria</a>
+                <a href="#compatibilidad-amorosa">Compatibilidad Amorosa</a>
+                <a href="#test-zodiacal">Test Zodiacal</a>
                 <a href="#compatibilidad">Compatibilidad</a>
                 <a href="#consejos">Consejos</a>
                 <a href="#astrologia">Origen y utilidad</a>
@@ -91,6 +93,9 @@
         <div class="ornate-divider">✦</div>
         <div class="keywords-strip">
             <a href="#horoscopo" class="keyword-tag">Horóscopo</a>
+            <a href="#suerte-diaria" class="keyword-tag">Suerte Diaria</a>
+            <a href="#compatibilidad-amorosa" class="keyword-tag">Compatibilidad Amorosa</a>
+            <a href="#test-zodiacal" class="keyword-tag">Test de Personalidad</a>
             <a href="#compatibilidad" class="keyword-tag">Compatibilidad de Signos</a>
             <a href="#consejos" class="keyword-tag">Consejos sobre tu Destino</a>
             <a href="#astrologia" class="keyword-tag">Origen y utilidad</a>
@@ -109,6 +114,95 @@
         </div>
         <div class="zodiac-grid" id="zodiac-grid">
             <div class="loading-text">Alineando los astros…</div>
+        </div>
+    </section>
+
+    <!-- ═══ AD SLOT ═══ -->
+    <div class="ad-slot" aria-hidden="true">Espacio publicitario</div>
+
+    <!-- ═══ DAILY LUCK GENERATOR ═══ -->
+    <section class="interactive-section container" id="suerte-diaria">
+        <div class="section-header">
+            <h2 class="gold-text">Tu Suerte de Hoy</h2>
+            <p>Descubre lo que la energía cósmica tiene preparado para ti en cada ámbito</p>
+            <div class="ornate-divider">✧</div>
+        </div>
+        <div id="luck-container">
+            <div class="loading-text">Consultando la energía cósmica…</div>
+        </div>
+    </section>
+
+    <!-- ═══ AD SLOT ═══ -->
+    <div class="ad-slot" aria-hidden="true">Espacio publicitario</div>
+
+    <!-- ═══ LOVE COMPATIBILITY ═══ -->
+    <section class="interactive-section container" id="compatibilidad-amorosa">
+        <div class="section-header">
+            <h2 class="gold-text">Compatibilidad Amorosa</h2>
+            <p>Selecciona tu signo y el de tu pareja para descubrir vuestra conexión astral</p>
+            <div class="ornate-divider">✧</div>
+        </div>
+        <div class="interactive-panel">
+            <div class="love-selectors">
+                <div class="love-selector-group">
+                    <label for="love-sign-1">Tu signo</label>
+                    <select id="love-sign-1" class="sign-select">
+                        <option value="">Selecciona tu signo</option>
+                        <option value="aries">♈ Aries</option>
+                        <option value="tauro">♉ Tauro</option>
+                        <option value="geminis">♊ Géminis</option>
+                        <option value="cancer">♋ Cáncer</option>
+                        <option value="leo">♌ Leo</option>
+                        <option value="virgo">♍ Virgo</option>
+                        <option value="libra">♎ Libra</option>
+                        <option value="escorpio">♏ Escorpio</option>
+                        <option value="sagitario">♐ Sagitario</option>
+                        <option value="capricornio">♑ Capricornio</option>
+                        <option value="acuario">♒ Acuario</option>
+                        <option value="piscis">♓ Piscis</option>
+                    </select>
+                </div>
+                <span class="love-vs">❤️</span>
+                <div class="love-selector-group">
+                    <label for="love-sign-2">Su signo</label>
+                    <select id="love-sign-2" class="sign-select">
+                        <option value="">Selecciona su signo</option>
+                        <option value="aries">♈ Aries</option>
+                        <option value="tauro">♉ Tauro</option>
+                        <option value="geminis">♊ Géminis</option>
+                        <option value="cancer">♋ Cáncer</option>
+                        <option value="leo">♌ Leo</option>
+                        <option value="virgo">♍ Virgo</option>
+                        <option value="libra">♎ Libra</option>
+                        <option value="escorpio">♏ Escorpio</option>
+                        <option value="sagitario">♐ Sagitario</option>
+                        <option value="capricornio">♑ Capricornio</option>
+                        <option value="acuario">♒ Acuario</option>
+                        <option value="piscis">♓ Piscis</option>
+                    </select>
+                </div>
+            </div>
+            <div class="love-action">
+                <button class="btn btn-gold" id="love-compat-btn">✦ Descubrir compatibilidad</button>
+            </div>
+            <div id="love-result" class="love-result" style="display:none"></div>
+        </div>
+    </section>
+
+    <!-- ═══ AD SLOT ═══ -->
+    <div class="ad-slot" aria-hidden="true">Espacio publicitario</div>
+
+    <!-- ═══ ZODIAC PERSONALITY TEST ═══ -->
+    <section class="interactive-section container" id="test-zodiacal">
+        <div class="section-header">
+            <h2 class="gold-text">Test de Personalidad Zodiacal</h2>
+            <p>Descubre qué signo define tu esencia interior respondiendo estas preguntas</p>
+            <div class="ornate-divider">✧</div>
+        </div>
+        <div class="interactive-panel">
+            <div id="quiz-container">
+                <div class="loading-text">Preparando tu test astral…</div>
+            </div>
         </div>
     </section>
 
@@ -235,7 +329,7 @@
                 <!-- Injected by JS -->
             </div>
             <div class="modal-footer-actions">
-                <button class="btn btn-ghost" id="check-compatibility">✦ Ver compatibilidad (Próximamente)</button>
+                <button class="btn btn-ghost" id="check-compatibility">✦ Ver compatibilidad</button>
             </div>
         </div>
     </div>
@@ -317,6 +411,7 @@
     <!-- Scripts -->
     <script src="assets/js/horoscope.js"></script>
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/interactive.js"></script>
 </body>
 
 </html>
