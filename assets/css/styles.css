@@ -653,23 +653,29 @@ a.keyword-tag:hover {
 
 .modal-close {
     position: absolute;
-    top: 1.25rem;
-    right: 1.5rem;
-    background: none;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(10, 11, 16, 0.6);
     border: 1px solid var(--border-gold);
     color: var(--gold);
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 50%;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+    -webkit-tap-highlight-color: rgba(201, 168, 76, 0.2);
+    touch-action: manipulation;
 }
 
-.modal-close:hover {
+.modal-close:hover,
+.modal-close:active {
     background: var(--amber-glow);
     border-color: var(--gold);
 }
@@ -1885,6 +1891,144 @@ a.keyword-tag:hover {
     font-style: italic;
 }
 
+/* ── Luck Sign Selector ─────────────────────────────────── */
+.luck-sign-selector {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.luck-sign-label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.75rem;
+}
+
+.luck-select {
+    max-width: 320px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* ── Luck History ────────────────────────────────────────── */
+.luck-history {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.luck-history-title {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.luck-history-day {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+
+.luck-history-day:hover,
+.luck-history-day[open] {
+    border-color: var(--border-gold);
+}
+
+.luck-history-summary {
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    transition: background 0.3s;
+}
+
+.luck-history-summary::-webkit-details-marker {
+    display: none;
+}
+
+.luck-history-summary:hover {
+    background: rgba(201, 168, 76, 0.04);
+}
+
+.luck-history-date {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+}
+
+.luck-history-sign {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--gold-light);
+}
+
+.luck-history-detail {
+    padding: 0.75rem 1.25rem 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.luck-history-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.luck-history-emoji {
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+.luck-history-label {
+    color: var(--text-muted);
+    min-width: 120px;
+    font-size: 0.82rem;
+}
+
+.luck-history-dots {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.luck-dot-mini {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--border-subtle);
+    transition: all 0.3s;
+}
+
+.luck-dot-mini.active {
+    box-shadow: 0 0 6px currentColor;
+}
+
+.luck-history-level {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-left: auto;
+}
+
 @media (max-width: 1024px) {
     .advice-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1917,10 +2061,34 @@ a.keyword-tag:hover {
     .luck-grid {
         grid-template-columns: 1fr 1fr;
     }
+
+    .luck-history-item {
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
+
+    .luck-history-label {
+        min-width: 100px;
+    }
 }
 
 @media (max-width: 480px) {
     .luck-grid {
         grid-template-columns: 1fr;
+    }
+
+    .luck-history-summary {
+        flex-direction: column;
+        gap: 0.3rem;
+        align-items: flex-start;
+    }
+
+    .luck-history-item {
+        font-size: 0.8rem;
+    }
+
+    .luck-history-label {
+        min-width: 80px;
+        font-size: 0.78rem;
     }
 }

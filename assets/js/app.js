@@ -131,7 +131,16 @@ function initModal() {
     if (!modal) return;
 
     if (closeBtn) {
-        closeBtn.addEventListener('click', () => closeHoroscopeModal());
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeHoroscopeModal();
+        });
+        closeBtn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeHoroscopeModal();
+        });
     }
 
     modal.addEventListener('click', (e) => {

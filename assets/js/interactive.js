@@ -361,7 +361,7 @@ function showLoveResult(html) {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   3. DAILY LUCK GENERATOR
+   3. DAILY LUCK GENERATOR — Personalized (userSeed + sign + date)
    ══════════════════════════════════════════════════════════════ */
 const LUCK_CATEGORIES = [
     { id: 'general', emoji: '🍀', label: 'Suerte General' },
@@ -417,39 +417,245 @@ const LUCK_MESSAGES = {
     ]
 };
 
-function initDailyLuck() {
-    const container = document.getElementById('luck-container');
-    if (!container) return;
+const LUCK_SIGN_OPTIONS = [
+    { id: 'aries', name: 'Aries', icon: '♈' },
+    { id: 'tauro', name: 'Tauro', icon: '♉' },
+    { id: 'geminis', name: 'Géminis', icon: '♊' },
+    { id: 'cancer', name: 'Cáncer', icon: '♋' },
+    { id: 'leo', name: 'Leo', icon: '♌' },
+    { id: 'virgo', name: 'Virgo', icon: '♍' },
+    { id: 'libra', name: 'Libra', icon: '♎' },
+    { id: 'escorpio', name: 'Escorpio', icon: '♏' },
+    { id: 'sagitario', name: 'Sagitario', icon: '♐' },
+    { id: 'capricornio', name: 'Capricornio', icon: '♑' },
+    { id: 'acuario', name: 'Acuario', icon: '♒' },
+    { id: 'piscis', name: 'Piscis', icon: '♓' }
+];
 
-    const today = todayStr();
-    let html = '<div class="luck-grid">';
+/* ── User seed: unique identifier per browser/user ── */
+function getUserSeed() {
+    var seed = localStorage.getItem('userSeed');
+    if (!seed) {
+        seed = Math.random().toString(36).substring(2) + Date.now().toString(36);
+        localStorage.setItem('userSeed', seed);
+    }
+    return seed;
+}
 
+/* ── Personalized deterministic hash ── */
+function luckPersonalHash(seed, max) {
+    var hash = 0;
+    for (var i = 0; i < seed.length; i++) {
+        hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash) % max;
+}
+
+/* ── Generate luck results for a given date + sign + userSeed ── */
+function generateLuckResults(fecha, signoId, userSeed) {
+    var results = {};
     LUCK_CATEGORIES.forEach(function (cat) {
-        var seed = today + ':luck:' + cat.id;
-        var h = interactiveHash(seed);
+        var semilla = fecha + signoId + userSeed + cat.id;
+        var h = luckPersonalHash(semilla, 1000);
         var levelIdx = h % 5;
         var luckLevel = LUCK_LEVELS[levelIdx];
         var message = LUCK_MESSAGES[cat.id][h % LUCK_MESSAGES[cat.id].length];
+        results[cat.id] = {
+            levelIdx: levelIdx,
+            level: luckLevel,
+            message: message,
+            emoji: cat.emoji,
+            label: cat.label
+        };
+    });
+    return results;
+}
 
+/* ── Save to history (max 7 days) ── */
+function saveLuckHistory(fecha, signoId, signoName, results) {
+    var historial = {};
+    try {
+        historial = JSON.parse(localStorage.getItem('suerteHistorial')) || {};
+    } catch (e) {
+        historial = {};
+    }
+
+    // Build a summary for the day
+    var resumen = [];
+    LUCK_CATEGORIES.forEach(function (cat) {
+        var r = results[cat.id];
+        resumen.push({
+            emoji: r.emoji,
+            label: r.label,
+            levelLabel: r.level.label,
+            levelColor: r.level.color,
+            levelIdx: r.levelIdx,
+            message: r.message
+        });
+    });
+
+    historial[fecha] = {
+        signo: signoName,
+        signoId: signoId,
+        resumen: resumen
+    };
+
+    // Keep only last 7 days
+    var fechasOrdenadas = Object.keys(historial).sort().reverse();
+    var ultimos7 = fechasOrdenadas.slice(0, 7);
+    var historialFiltrado = {};
+    ultimos7.forEach(function (f) {
+        historialFiltrado[f] = historial[f];
+    });
+
+    localStorage.setItem('suerteHistorial', JSON.stringify(historialFiltrado));
+    return historialFiltrado;
+}
+
+/* ── Render the luck grid cards ── */
+function renderLuckGrid(results) {
+    var html = '<div class="luck-grid">';
+
+    LUCK_CATEGORIES.forEach(function (cat) {
+        var r = results[cat.id];
         var dotsHtml = '';
         for (var i = 0; i < 5; i++) {
-            dotsHtml += '<span class="luck-dot' + (i <= levelIdx ? ' active' : '') + '" style="' + (i <= levelIdx ? 'background:' + luckLevel.color : '') + '"></span>';
+            dotsHtml += '<span class="luck-dot' + (i <= r.levelIdx ? ' active' : '') + '" style="' + (i <= r.levelIdx ? 'background:' + r.level.color : '') + '"></span>';
         }
 
         html +=
             '<div class="luck-card">' +
-            '<span class="luck-emoji">' + cat.emoji + '</span>' +
-            '<h4 class="luck-label">' + cat.label + '</h4>' +
+            '<span class="luck-emoji">' + r.emoji + '</span>' +
+            '<h4 class="luck-label">' + r.label + '</h4>' +
             '<div class="luck-dots">' + dotsHtml + '</div>' +
-            '<div class="luck-level-text" style="color:' + luckLevel.color + '">' + luckLevel.label + '</div>' +
-            '<p class="luck-message">' + message + '</p>' +
+            '<div class="luck-level-text" style="color:' + r.level.color + '">' + r.level.label + '</div>' +
+            '<p class="luck-message">' + r.message + '</p>' +
             '</div>';
     });
 
     html += '</div>';
-    html += '<p class="luck-date-note">🔮 Resultado basado en la energía cósmica del <strong>' + formatDateES(today) + '</strong>. Se actualiza cada día.</p>';
+    return html;
+}
 
-    container.innerHTML = html;
+/* ── Render history section ── */
+function renderLuckHistory(historial, todayDate) {
+    var fechas = Object.keys(historial).sort().reverse();
+    // Exclude today from history (it's already shown above)
+    var pastDates = fechas.filter(function (f) { return f !== todayDate; });
+    if (pastDates.length === 0) return '';
+
+    var html = '<div class="luck-history">';
+    html += '<h4 class="luck-history-title">📅 Historial de los últimos días</h4>';
+
+    pastDates.forEach(function (fecha) {
+        var entry = historial[fecha];
+        var signInfo = LUCK_SIGN_OPTIONS.find(function (s) { return s.id === entry.signoId; });
+        var signIcon = signInfo ? signInfo.icon : '✦';
+
+        html += '<details class="luck-history-day">';
+        html += '<summary class="luck-history-summary">';
+        html += '<span class="luck-history-date">' + formatDateES(fecha) + '</span>';
+        html += '<span class="luck-history-sign">' + signIcon + ' ' + entry.signo + '</span>';
+        html += '</summary>';
+        html += '<div class="luck-history-detail">';
+
+        entry.resumen.forEach(function (cat) {
+            var miniDots = '';
+            for (var i = 0; i < 5; i++) {
+                miniDots += '<span class="luck-dot-mini' + (i <= cat.levelIdx ? ' active' : '') + '" style="' + (i <= cat.levelIdx ? 'background:' + cat.levelColor : '') + '"></span>';
+            }
+            html +=
+                '<div class="luck-history-item">' +
+                '<span class="luck-history-emoji">' + cat.emoji + '</span>' +
+                '<span class="luck-history-label">' + cat.label + '</span>' +
+                '<span class="luck-history-dots">' + miniDots + '</span>' +
+                '<span class="luck-history-level" style="color:' + cat.levelColor + '">' + cat.levelLabel + '</span>' +
+                '</div>';
+        });
+
+        html += '</div></details>';
+    });
+
+    html += '</div>';
+    return html;
+}
+
+/* ── Main initialization ── */
+function initDailyLuck() {
+    var container = document.getElementById('luck-container');
+    if (!container) return;
+
+    var userSeed = getUserSeed();
+    var today = todayStr();
+
+    // Recover previously selected sign or default
+    var savedSign = localStorage.getItem('suerteSigno') || '';
+
+    // Build sign selector
+    var selectorHtml = '<div class="luck-sign-selector">';
+    selectorHtml += '<label for="luck-sign-select" class="luck-sign-label">Selecciona tu signo para personalizar tu suerte</label>';
+    selectorHtml += '<select id="luck-sign-select" class="sign-select luck-select">';
+    selectorHtml += '<option value="">✦ Elige tu signo</option>';
+    LUCK_SIGN_OPTIONS.forEach(function (s) {
+        selectorHtml += '<option value="' + s.id + '"' + (s.id === savedSign ? ' selected' : '') + '>' + s.icon + ' ' + s.name + '</option>';
+    });
+    selectorHtml += '</select>';
+    selectorHtml += '</div>';
+
+    // Results placeholder
+    selectorHtml += '<div id="luck-results-area"></div>';
+
+    container.innerHTML = selectorHtml;
+
+    // If a sign was previously saved, render immediately
+    if (savedSign) {
+        renderPersonalizedLuck(today, savedSign, userSeed);
+    }
+
+    // Listen for sign changes
+    var select = document.getElementById('luck-sign-select');
+    if (select) {
+        select.addEventListener('change', function () {
+            var signoId = this.value;
+            if (signoId) {
+                localStorage.setItem('suerteSigno', signoId);
+                renderPersonalizedLuck(today, signoId, userSeed);
+            } else {
+                localStorage.removeItem('suerteSigno');
+                var area = document.getElementById('luck-results-area');
+                if (area) area.innerHTML = '';
+            }
+        });
+    }
+}
+
+/* ── Render personalized luck + save history ── */
+function renderPersonalizedLuck(fecha, signoId, userSeed) {
+    var area = document.getElementById('luck-results-area');
+    if (!area) return;
+
+    var signInfo = LUCK_SIGN_OPTIONS.find(function (s) { return s.id === signoId; });
+    var signoName = signInfo ? signInfo.name : signoId;
+
+    // Generate results
+    var results = generateLuckResults(fecha, signoId, userSeed);
+
+    // Save to history
+    var historial = saveLuckHistory(fecha, signoId, signoName, results);
+
+    // Render luck grid
+    var html = renderLuckGrid(results);
+
+    // Date note
+    html += '<p class="luck-date-note">🔮 Resultado basado en la energía cósmica del <strong>' + formatDateES(fecha) + '</strong> para <strong>' + signInfo.icon + ' ' + signoName + '</strong>. Se actualiza cada día.</p>';
+
+    // Render history
+    html += renderLuckHistory(historial, fecha);
+
+    area.innerHTML = html;
+
+    // Smooth scroll to results
+    area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function formatDateES(dateStr) {
