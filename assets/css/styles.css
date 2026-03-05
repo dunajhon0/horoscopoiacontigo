@@ -243,29 +243,34 @@ ul {
     justify-content: space-between;
     align-items: center;
     height: 70px;
+    gap: 1.5rem;
 }
 
 .nav-brand {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
     text-decoration: none;
+    flex-shrink: 0;
+    padding-right: 1.25rem;
+    border-right: 1px solid var(--border-subtle);
 }
 
 .nav-brand img {
-    height: 48px;
+    height: 42px;
     width: auto;
     border-radius: 6px;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .nav-brand img:hover {
     transform: scale(1.08);
+    box-shadow: 0 0 18px rgba(201, 168, 76, 0.3);
 }
 
 .nav-brand span {
     font-family: var(--font-display);
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--gold);
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -273,34 +278,38 @@ ul {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.4rem;
     align-items: center;
+    flex-wrap: nowrap;
+    overflow: hidden;
 }
 
 .nav-links a {
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 500;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     transition: var(--transition);
     position: relative;
+    white-space: nowrap;
+    padding: 0.25rem 0;
 }
 
 .nav-links a::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: -3px;
     left: 0;
     width: 0%;
     height: 1px;
-    background: var(--gold);
+    background: linear-gradient(90deg, var(--gold), var(--amber));
     transition: width 0.3s var(--ease-out);
 }
 
 .nav-links a:hover {
-    color: var(--gold);
+    color: var(--gold-light);
 }
 
 .nav-links a:hover::after {
@@ -747,6 +756,26 @@ a.keyword-tag:hover {
 .modal-footer-actions {
     margin-top: 2rem;
     text-align: center;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.modal-footer-actions .btn {
+    font-size: 1rem;
+    padding: 0.9rem 2.2rem;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--gold), var(--amber));
+    color: #0a0b10;
+    border: none;
+    box-shadow: 0 4px 22px rgba(201, 168, 76, 0.35);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.modal-footer-actions .btn:hover {
+    box-shadow: 0 6px 35px rgba(201, 168, 76, 0.55);
+    transform: translateY(-2px) scale(1.03);
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
 }
 
 /* ── Compatibility Result (inside modal) ── */
@@ -775,6 +804,95 @@ a.keyword-tag:hover {
     }
 }
 
+
+/* ── Compatibility Teaser (inside modal — call to action) ── */
+.compat-teaser {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0;
+    margin-bottom: 1.75rem;
+    padding: 1.1rem 1.4rem;
+    background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), rgba(212, 136, 43, 0.06));
+    border: 1px solid var(--border-gold);
+    border-radius: 14px;
+    animation: teaserPulse 3s ease-in-out infinite;
+}
+
+@keyframes teaserPulse {
+
+    0%,
+    100% {
+        border-color: rgba(201, 168, 76, 0.3);
+        box-shadow: none;
+    }
+
+    50% {
+        border-color: rgba(201, 168, 76, 0.65);
+        box-shadow: 0 0 20px rgba(201, 168, 76, 0.12);
+    }
+}
+
+.compat-teaser-icon {
+    font-size: 1.9rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 8px rgba(201, 168, 76, 0.4));
+    animation: teaserIconFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes teaserIconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-4px) rotate(12deg);
+    }
+}
+
+.compat-teaser-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.compat-teaser-text strong {
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    letter-spacing: 1px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+}
+
+.compat-teaser-text span {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.compat-teaser-arrow {
+    font-size: 1.4rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    animation: arrowBounce 1.4s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateY(5px);
+        opacity: 1;
+    }
+}
 
 /* ══════════════════════════════════════════════════════════════
    BUTTONS
@@ -830,25 +948,46 @@ a.keyword-tag:hover {
 .daily-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    margin-top: 1.5rem;
-    padding: 0.5rem 1.4rem;
-    border: 1px solid rgba(76, 175, 80, 0.35);
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #a8d5a2;
-    letter-spacing: 0.5px;
-    background: rgba(76, 175, 80, 0.08);
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding: 0.7rem 2rem;
+    border: 1px solid rgba(76, 200, 80, 0.5);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #c8f0c2;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, rgba(40, 130, 50, 0.18), rgba(76, 175, 80, 0.1));
+    box-shadow: 0 0 20px rgba(76, 200, 80, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: badgeGlow 3s ease-in-out infinite;
+    text-transform: uppercase;
+}
+
+@keyframes badgeGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 18px rgba(76, 200, 80, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        border-color: rgba(76, 200, 80, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 35px rgba(76, 200, 80, 0.38), 0 0 60px rgba(76, 200, 80, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        border-color: rgba(100, 230, 100, 0.75);
+    }
 }
 
 .badge-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: #66bb6a;
+    background: #6ee069;
     display: inline-block;
+    flex-shrink: 0;
     animation: dotPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 8px #6ee069;
 }
 
 @keyframes dotPulse {
@@ -856,12 +995,14 @@ a.keyword-tag:hover {
     0%,
     100% {
         opacity: 1;
-        box-shadow: 0 0 4px #66bb6a;
+        box-shadow: 0 0 6px #6ee069;
+        transform: scale(1);
     }
 
     50% {
-        opacity: 0.4;
-        box-shadow: 0 0 10px #66bb6a;
+        opacity: 0.55;
+        box-shadow: 0 0 16px #6ee069;
+        transform: scale(0.85);
     }
 }
 

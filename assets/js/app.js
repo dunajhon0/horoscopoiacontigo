@@ -6,12 +6,37 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Scroll to top immediately on page load to avoid browser restoring
+    // scroll position to a mid-page section (e.g. horoscopo)
+    scrollToTop();
     setDynamicGreeting();
     setCurrentYear();
     initAudioPlayer();
     initCookieConsent();
     initModal();
     initMobileNav();
+    initLogoLink();
+});
+
+// Scroll to very top of page — called both at DOMContentLoaded and at load
+// to override the browser's scroll-restoration which fires after the DOM is ready
+function scrollToTop() {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+}
+
+// Also block any late scroll-restoration fires (e.g. after images load)
+window.addEventListener('load', () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+});
+
+// Belt-and-suspenders: block browser's beforeunload scroll save
+window.addEventListener('beforeunload', () => {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
 });
 
 // ── Dynamic Greeting ────────────────────────────────────────
@@ -264,5 +289,21 @@ function initMobileNav() {
             toggle.setAttribute('aria-expanded', 'false');
             toggle.textContent = '☰';
         });
+    });
+}
+
+// ── Logo Link — always scroll to top ────────────────────────
+function initLogoLink() {
+    const logoLink = document.getElementById('logo-link');
+    if (!logoLink) return;
+
+    logoLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Smooth scroll to the very top / hero
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        // Update URL hash cleanly
+        if (history.pushState) {
+            history.pushState(null, null, '#hero');
+        }
     });
 }

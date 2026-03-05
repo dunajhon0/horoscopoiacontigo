@@ -135,8 +135,16 @@ function openModal(sign) {
         dateEl.textContent = ds.charAt(0).toUpperCase() + ds.slice(1);
     }
 
-    // Body content
+    // Body content — teaser first so it's immediately visible on open
     bodyEl.innerHTML =
+        '<div class="compat-teaser">' +
+        '<div class="compat-teaser-icon">💫</div>' +
+        '<div class="compat-teaser-text">' +
+        '<strong>¿Con quién conectas hoy?</strong>' +
+        '<span>Al terminar la lectura, pulsa el botón para descubrir tu compatibilidad astral del día</span>' +
+        '</div>' +
+        '<div class="compat-teaser-arrow">↓</div>' +
+        '</div>' +
         '<div class="reading-block">' +
         '<h4>✦ Visión General</h4>' +
         '<p>' + data.resumen + '</p>' +
