@@ -588,16 +588,13 @@ function initDailyLuck() {
     var userSeed = getUserSeed();
     var today = todayStr();
 
-    // Recover previously selected sign or default
-    var savedSign = localStorage.getItem('suerteSigno') || '';
-
-    // Build sign selector
+    // Build sign selector (always defaults to empty)
     var selectorHtml = '<div class="luck-sign-selector">';
     selectorHtml += '<label for="luck-sign-select" class="luck-sign-label">Selecciona tu signo para personalizar tu suerte</label>';
     selectorHtml += '<select id="luck-sign-select" class="sign-select luck-select">';
     selectorHtml += '<option value="">✦ Elige tu signo</option>';
     LUCK_SIGN_OPTIONS.forEach(function (s) {
-        selectorHtml += '<option value="' + s.id + '"' + (s.id === savedSign ? ' selected' : '') + '>' + s.icon + ' ' + s.name + '</option>';
+        selectorHtml += '<option value="' + s.id + '">' + s.icon + ' ' + s.name + '</option>';
     });
     selectorHtml += '</select>';
     selectorHtml += '</div>';
@@ -607,21 +604,14 @@ function initDailyLuck() {
 
     container.innerHTML = selectorHtml;
 
-    // If a sign was previously saved, render immediately
-    if (savedSign) {
-        renderPersonalizedLuck(today, savedSign, userSeed);
-    }
-
     // Listen for sign changes
     var select = document.getElementById('luck-sign-select');
     if (select) {
         select.addEventListener('change', function () {
             var signoId = this.value;
             if (signoId) {
-                localStorage.setItem('suerteSigno', signoId);
                 renderPersonalizedLuck(today, signoId, userSeed);
             } else {
-                localStorage.removeItem('suerteSigno');
                 var area = document.getElementById('luck-results-area');
                 if (area) area.innerHTML = '';
             }

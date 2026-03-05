@@ -1232,19 +1232,6 @@ a.keyword-tag:hover {
     text-decoration: underline;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   AD SLOTS
-   ══════════════════════════════════════════════════════════════ */
-.ad-slot {
-    margin: 3rem auto;
-    padding: 1rem;
-    max-width: 728px;
-    text-align: center;
-    border: 1px dashed var(--border-subtle);
-    border-radius: 8px;
-    color: var(--text-dim);
-    font-size: 0.75rem;
-}
 
 /* ══════════════════════════════════════════════════════════════
    FOOTER
