@@ -243,7 +243,7 @@ ul {
     justify-content: space-between;
     align-items: center;
     height: 70px;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .nav-brand {
@@ -252,7 +252,7 @@ ul {
     gap: 0.65rem;
     text-decoration: none;
     flex-shrink: 0;
-    padding-right: 1.25rem;
+    padding-right: 0.5rem;
     border-right: 1px solid var(--border-subtle);
 }
 
@@ -270,27 +270,31 @@ ul {
 
 .nav-brand span {
     font-family: var(--font-display);
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1.2vw, 1.15rem);
     color: var(--gold);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(201, 168, 76, 0.4);
+    white-space: nowrap;
 }
 
 .nav-links {
     display: flex;
-    gap: 1.4rem;
+    gap: 1rem;
     align-items: center;
-    flex-wrap: nowrap;
-    overflow: hidden;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: flex-end;
 }
 
 .nav-links a {
     font-family: var(--font-body);
-    font-size: 0.78rem;
+    font-size: clamp(0.62rem, 0.8vw, 0.75rem);
     font-weight: 500;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 1.2px;
+    letter-spacing: 0.5px;
     transition: var(--transition);
     position: relative;
     white-space: nowrap;
@@ -502,6 +506,60 @@ a.keyword-tag:hover {
     gap: 1.5rem;
 }
 
+/* ── Showcase Portal ── */
+.showcase-section {
+    padding: 5rem 0;
+}
+
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.showcase-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.showcase-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.showcase-card .card-dates {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.showcase-card-btn-container {
+    margin-top: auto;
+    text-align: center;
+    padding-top: 1.5rem;
+}
+
+.showcase-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--gold), var(--amber));
+    color: #0a0b10 !important;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    border: none;
+    box-shadow: 0 4px 15px rgba(201, 168, 76, 0.2);
+}
+
+.showcase-btn:hover {
+    box-shadow: 0 6px 25px rgba(201, 168, 76, 0.4);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+}
+
 /* ── Zodiac Card (Tarot-style, inspired by entorno2.png) ──── */
 .zodiac-card {
     position: relative;
@@ -523,6 +581,8 @@ a.keyword-tag:hover {
     background: radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.08) 0%, transparent 60%);
     opacity: 0;
     transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* Ornate corner markers */
@@ -1445,16 +1505,15 @@ a.keyword-tag:hover {
 /* ══════════════════════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════════════════════ */
-@media (max-width: 1024px) {
-    .zodiac-grid {
-        grid-template-columns: repeat(3, 1fr);
+@media (max-width: 1200px) {
+    .showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .zodiac-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .nav-links {
@@ -1464,6 +1523,8 @@ a.keyword-tag:hover {
     .nav-links.active {
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
         position: absolute;
         top: 70px;
         left: 0;
@@ -1476,6 +1537,17 @@ a.keyword-tag:hover {
 
     .nav-toggle {
         display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .zodiac-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .showcase-grid {
+        grid-template-columns: 1fr;
     }
 
     .hero-logo {
@@ -1505,7 +1577,8 @@ a.keyword-tag:hover {
 }
 
 @media (max-width: 480px) {
-    .zodiac-grid {
+    .zodiac-grid,
+    .showcase-grid {
         grid-template-columns: 1fr;
     }
 

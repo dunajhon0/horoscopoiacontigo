@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto — Horóscopo IA Contigo</title>
+    <meta name="description" content="Contacta con el equipo de Horóscopo IA Contigo para resolver dudas legales o de privacidad.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3779816940145698">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3779816940145698"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            max-width: 600px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--gold);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(5, 5, 7, 0.6);
+            border: 1px solid var(--border-gold);
+            color: var(--text-primary);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(201, 168, 76, 0.2);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--gold), var(--amber));
+            color: #0a0b10;
+            border: none;
+            padding: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            box-shadow: 0 6px 25px rgba(201, 168, 76, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .recaptcha-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+        
+        .recaptcha-note a {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-bg">
+        <div class="stars-layer"></div>
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+    </div>
+
+    <!-- ═══ NAVIGATION ═══ -->
+    <header class="site-nav" role="banner">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-brand" aria-label="Inicio" id="logo-link">
+                <img src="assets/images/logo.png" alt="Horóscopo IA Contigo" class="nav-logo-lg">
+                <span class="brand-text">Horóscopo IA Contigo</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+            <nav class="nav-links" id="nav-links" aria-label="Navegación principal">
+                <a href="index.html">Inicio</a>
+                <a href="horoscopo.html">Horóscopo y Suerte</a>
+                <a href="compatibilidad.html">Compatibilidad</a>
+                <a href="test-zodiacal.html">Test Zodiacal</a>
+                <a href="consejos-origen.html">Consejos y Origen</a>
+                <a href="faq.html">Información legal y FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content container" style="padding-top: 120px;">
+        <div class="content-panel">
+            <h1 class="gold-text">Contacto</h1>
+            <p>Si tienes dudas sobre nuestra política de privacidad, el uso de cookies o el contenido de la web, escríbenos a través de este formulario.</p>
+
+            <form id="contactForm" method="POST" class="contact-form">
+                <!-- Anti-spam for FormSubmit -->
+                <input type="hidden" name="_subject" value="Nuevo mensaje - Horóscopo IA Contacto!">
+                <input type="hidden" name="_captcha" value="true">
+                <input type="hidden" name="_template" value="table">
+                
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Describe tu consulta ..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                
+                <div class="recaptcha-note">
+                    Este sitio está protegido por reCAPTCHA y se aplican la <a href="privacidad.html">Política de Privacidad</a> y los <a href="aviso-legal.html">Términos de Servicio</a> de Google.
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <nav class="footer-nav">
+                <a href="privacidad.html">Privacidad</a>
+                <a href="cookies.html">Cookies</a>
+                <a href="aviso-legal.html">Aviso Legal</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+            <p class="footer-copy">&copy; <span id="current-year"></span> Dunajhon.</p>
+        </div>
+    </footer>
+
+    <!-- Obfuscate Email for Action URL -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contactForm');
+            if (form) {
+                // Genera la URL dinámica para que no esté el correo en texto plano en el HTML
+                const user = 'dunajhon0';
+                const domain = 'gmail.com';
+                form.setAttribute('action', 'https://formsub' + 'mit.co/' + user + '@' + domain);
+            }
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

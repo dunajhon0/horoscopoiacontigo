@@ -71,7 +71,63 @@ function initAudioPlayer() {
 
     if (!playBtn || !audio) return;
 
-    audio.volume = 0.35;
+    // Load state
+    const savedVolume = localStorage.getItem('horoscope_audio_volume') || 0.35;
+    const savedTime = localStorage.getItem('horoscope_audio_time') || 0;
+    const isPlaying = localStorage.getItem('horoscope_audio_playing') === 'true';
+
+    audio.volume = savedVolume;
+    audio.currentTime = savedTime;
+
+    if (volumeSlider) {
+        volumeSlider.value = savedVolume * 100;
+        updateVolumeTrack(volumeSlider);
+    }
+
+    const setPlayingUI = () => {
+        playBtn.classList.add('playing');
+        if (panel) panel.classList.add('active');
+        if (iconPlay) iconPlay.style.display = 'none';
+        if (iconPause) iconPause.style.display = 'block';
+    };
+
+    const setPausedUI = () => {
+        playBtn.classList.remove('playing');
+        if (panel) panel.classList.remove('active');
+        if (iconPlay) iconPlay.style.display = 'block';
+        if (iconPause) iconPause.style.display = 'none';
+    };
+
+    // Auto-resume if it was playing on the previous page
+    if (isPlaying) {
+        audio.play().then(() => {
+            setPlayingUI();
+        }).catch(err => {
+            console.warn('Auto-play blocked by browser. Awaiting user interaction to resume.', err);
+            
+            // Wait for the FIRST interaction on the document to resume playing
+            const resumeOnAction = () => {
+                audio.play().then(() => {
+                    setPlayingUI();
+                    localStorage.setItem('horoscope_audio_playing', 'true');
+                }).catch(e => console.log('Silently blocked:', e));
+                
+                // Remove listeners once executed
+                document.removeEventListener('click', resumeOnAction);
+                document.removeEventListener('touchstart', resumeOnAction);
+                document.removeEventListener('keydown', resumeOnAction);
+            };
+
+            document.addEventListener('click', resumeOnAction);
+            document.addEventListener('touchstart', resumeOnAction);
+            document.addEventListener('keydown', resumeOnAction);
+        });
+    }
+
+    // Save timestamp continuously
+    audio.addEventListener('timeupdate', () => {
+        localStorage.setItem('horoscope_audio_time', audio.currentTime);
+    });
 
     // Panel toggle (open/close)
     if (panelToggle && panel) {
@@ -84,27 +140,23 @@ function initAudioPlayer() {
     playBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play().then(() => {
-                playBtn.classList.add('playing');
-                if (panel) panel.classList.add('active');
-                if (iconPlay) iconPlay.style.display = 'none';
-                if (iconPause) iconPause.style.display = 'block';
+                localStorage.setItem('horoscope_audio_playing', 'true');
+                setPlayingUI();
             }).catch(err => {
                 console.warn('Audio play blocked:', err);
             });
         } else {
             audio.pause();
-            playBtn.classList.remove('playing');
-            if (panel) panel.classList.remove('active');
-            if (iconPlay) iconPlay.style.display = 'block';
-            if (iconPause) iconPause.style.display = 'none';
+            localStorage.setItem('horoscope_audio_playing', 'false');
+            setPausedUI();
         }
     });
 
     // Volume slider
     if (volumeSlider) {
-        updateVolumeTrack(volumeSlider);
         volumeSlider.addEventListener('input', () => {
             audio.volume = volumeSlider.value / 100;
+            localStorage.setItem('horoscope_audio_volume', audio.volume);
             updateVolumeTrack(volumeSlider);
         });
     }
@@ -298,12 +350,14 @@ function initLogoLink() {
     if (!logoLink) return;
 
     logoLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        // Smooth scroll to the very top / hero
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-        // Update URL hash cleanly
-        if (history.pushState) {
-            history.pushState(null, null, '#hero');
+        // Solo prevenir navegación si ya estamos en la página de inicio
+        const path = window.location.pathname;
+        if (path.endsWith('index.html') || path.endsWith('/')) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            if (history.pushState) {
+                history.pushState(null, null, '#hero');
+            }
         }
     });
 }
